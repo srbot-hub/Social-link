@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA Editzx - Link in Bio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #000000;
+            --neon-blue: #00f3ff;
+            --neon-green: #00ff66;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Share Tech Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            /* Cyber grid background */
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 2rem;
+            text-align: center;
+            animation: bootUp 1s ease-out forwards;
+        }
+
+        @keyframes bootUp {
+            0% { opacity: 0; transform: translateY(20px) scale(0.98); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        /* Profile Section */
+        .profile-wrapper {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4), 
+                        inset 0 0 20px rgba(0, 243, 255, 0.4);
+            margin: 0 auto 1rem;
+            display: block;
+            background-color: #0a0a0a;
+            padding: 3px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .bio {
+            font-size: 0.95rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+            letter-spacing: 1px;
+        }
+
+        /* Grid Icons Section */
+        .links-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .cyber-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+
+        /* Hover Animation: Changes to Neon Green */
+        .cyber-icon:hover {
+            color: var(--neon-green);
+            background: rgba(0, 255, 102, 0.1);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px var(--neon-green), 
+                        inset 0 0 10px rgba(0, 255, 102, 0.2);
+            transform: translateY(-5px) scale(1.1);
+            z-index: 2;
+        }
+
+        /* Click/Active Effect */
+        .cyber-icon:active {
+            transform: scale(0.9);
+            box-shadow: 0 0 5px var(--neon-green);
+            transition: all 0.1s;
+        }
+
+        /* Badge for Private Telegram */
+        .badge {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: var(--bg-color);
+            color: var(--neon-green);
+            font-size: 0.7rem;
+            padding: 3px;
+            border-radius: 50%;
+            border: 1px solid var(--neon-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+        }
+
+        .cyber-icon:hover .badge {
+            color: var(--bg-color);
+            background: var(--neon-green);
+        }
+
+        /* Tooltip style */
+        .cyber-icon::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--text-main);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--neon-blue);
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .cyber-icon:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: -35px;
+            border-color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+
+        /* Footer */
+        footer {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        footer:hover {
+            opacity: 1;
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .links-grid { gap: 1rem; }
+            .cyber-icon { width: 50px; height: 50px; font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="profile-wrapper">
+            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=SAEditzx&backgroundColor=000000" alt="SA Editzx" class="profile-pic">
+            <h1>SA Editzx</h1>
+            <p class="bio">SYSTEM ONLINE // INITIATING UPLINK</p>
+        </header>
+
+        <main class="links-grid">
+            <a href="Https://www.tiktok.com/@salim_editx1" class="cyber-icon" data-title="TikTok" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            
+            <a href="https://www.youtube.com/@salim_x_editx" class="cyber-icon" data-title="YouTube" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-youtube"></i>
+            </a>
+            
+            <a href="https://www.instagram.com/itz_me_salim_45?igsh=MWFpMmIya3ExM2cxcg==" class="cyber-icon" data-title="Instagram" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+            
+            <a href="https://t.me/+33Srlf8jLsZlYjA1" class="cyber-icon" data-title="Telegram (Public)" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-telegram"></i>
+            </a>
+            
+            <a href="https://t.me/edittutarile" class="cyber-icon" data-title="Telegram (Private)" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-telegram"></i>
+                <div class="badge"><i class="fas fa-lock"></i></div>
+            </a>
+            
+            <a href="https://wa.me/8801618119633" class="cyber-icon" data-title="WhatsApp" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            
+            <a href="https://www.facebook.com/share/1JK2NxKpEe/" class="cyber-icon" data-title="Facebook" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a href="https://salim-all-bot.github.io/web-view/" class="cyber-icon" data-title="APK Store" target="_blank" rel="noopener noreferrer">
+    <i class="fas fa-store"></i>
+</a>
+
+        </main>
+
+        <footer>
+            Powered by Salim Editzx
+        </footer>
+    </div>
+
+    <script>
+        // Adds a slight glitch effect on load to the title
+        document.addEventListener('DOMContentLoaded', () => {
+            const title = document.querySelector('h1');
+            setTimeout(() => {
+                title.style.textShadow = '2px 0 var(--neon-green), -2px 0 #ff00ff';
+                setTimeout(() => {
+                    title.style.textShadow = '0 0 10px var(--neon-blue)';
+                }, 150);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
